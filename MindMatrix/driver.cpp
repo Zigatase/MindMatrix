@@ -39,3 +39,42 @@ typedef struct _RTL_PROCESS_MODULE_INFORMATION
 
 	UCHAR FullPathName[256];
 } RTL_PROCESS_MODULE_INFORMATION, * PRTL_PROCESS_MODULE_INFORMATION;
+
+typedef struct _RTL_PROCESS_MODULES
+{
+	ULONG NumberOfModules;
+
+	RTL_PROCESS_MODULE_INFORMATION Modules[1];
+} RTL_PROCESS_MODULE, * PRTL_PROCESS_MODULES;
+
+extern "C" _declspec(dllimport)
+NTSTATUS NTAPI ZwProtectVirtualMemory(
+	HANDLE ProcessHandle,
+	PVOID * BaseAddress,
+	PULONG ProtectSize,
+	ULONG NewProtect,
+	PULONG OldProtect
+);
+
+extern "C" NTKERNELAPI
+PVOID NTAPI RtlFindRxporedRoutineByName(
+	_In_ PVOID ImageBase,
+	_In_ PCCH RoutineName
+);
+
+extern "C" NTSTATUS ZwQuerySystemInformation(ULONG InfoClass, PVOID Buffer, ULONG Length, PULONG ReturnLength);
+
+extern "C" NTKERNELAPI
+PPEB PsGetProcessPeb(
+	IN PEPROCESS Process
+);
+
+extern "C" NTSTATUS NTAPI MmCopyVirtualMemory(
+	PEPROCESS SourceProcess,
+	PVOID SourceAddress,
+	PEPROCESS TargetProcess,
+	PVOID TargetAddress,
+	SIZE_T BufferSize,
+	KPROCESSOR_MODE PreviousMode,
+	PSIZE_T ReturnSize
+);
