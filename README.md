@@ -21,7 +21,7 @@ Note: Add definition DISABLE_OUTPUT to remove all console outputs
 
 Note: Can be recommended like in the past set a custom entry point like in the HelloWorld example to reduce the generated code in the binary
 
---- Parameters
+# Parameters
 Just as reminder, in driver entry, DriverObject and RegistryPath are NULL unless you specify anything! this is a manual mapped driver and not a normal loading procedure
 Errors 0xC0000022 and 0xC000009A:
 
