@@ -1,13 +1,13 @@
 #include "hook.h"
 
 
-bool nullHook::CallKernelFunction(void* kernel_function_address)
+BOOL CallKernelFunction(void* kernel_function_address)
 {
 	if (!kernel_function_address)
 		return FALSE;
 
 	// Путь к драйверу который хотим хукнуть | название функции в драйвере
-	PVOID* function = reinterpret_cast<PVOID*>(GetSystemModuleExport("\\SystemRoot\\System32\\drivers\\dxgkrnl.sys",
+	PVOID* function = (PVOID*)(GetSystemModuleExport("\\SystemRoot\\System32\\drivers\\dxgkrnl.sys",
 																	"NtSetCompositionSurfaceStatistics"));
 
 	if (!function)
@@ -25,7 +25,7 @@ bool nullHook::CallKernelFunction(void* kernel_function_address)
 	memcpy((PVOID)((ULONG_PTR)orig), &shell_code, sizeof(shell_code));
 
 	// Получаем адресс перехвата
-	uintptr_t hook_address = reinterpret_cast<uintptr_t>(kernel_function_address);
+	uintptr_t hook_address = (uintptr_t)(kernel_function_address);
 	memcpy((PVOID)((ULONG_PTR)orig + sizeof(shell_code)), &hook_address, sizeof(void*));
 	memcpy((PVOID)((ULONG_PTR)orig + sizeof(shell_code) + sizeof(void*)), &shell_code_end, sizeof(shell_code_end));
 
@@ -36,7 +36,7 @@ bool nullHook::CallKernelFunction(void* kernel_function_address)
 }
 
 
-NTSTATUS nullHook::HookHandler(PVOID called_param)
+NTSTATUS HookHandler(PVOID called_param)
 {
 	return STATUS_SUCCESS;
 }

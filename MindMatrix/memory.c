@@ -38,6 +38,7 @@ PVOID GetSystemModuleBase(const char* module_name)
 	return module_base;
 }
 
+
 PVOID GetSystemModuleExport(const char* module_name, LPCSTR routine_name)
 {
 	PVOID lpModule = GetSystemModuleBase(module_name);
@@ -45,11 +46,11 @@ PVOID GetSystemModuleExport(const char* module_name, LPCSTR routine_name)
 	if (!lpModule)
 		return NULL;
 
-	return RtlFindRxporedRoutineByName(lpModule, routine_name);
+	return RtlFindExportedRoutineByName(lpModule, routine_name);
 }
 
 
-bool WriteMemory(void* address, void* buffer, size_t size)
+BOOL WriteMemory(void* address, void* buffer, size_t size)
 {
 	if (!RtlCopyMemory(address, buffer, size))
 		return FALSE;
@@ -57,7 +58,7 @@ bool WriteMemory(void* address, void* buffer, size_t size)
 		return TRUE;
 }
 
-bool WriteToReadOnlyMemory(void* address, void* buffer, size_t size)
+BOOL WriteToReadOnlyMemory(void* address, void* buffer, size_t size)
 {
 	PMDL Mdl = IoAllocateMdl(address, size, FALSE, FALSE, NULL);
 

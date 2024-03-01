@@ -129,9 +129,9 @@
     <FilesToPackage Include="$(TargetPath)" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="driver.cpp" />
-    <ClCompile Include="hook.cpp" />
-    <ClCompile Include="memory.cpp" />
+    <ClCompile Include="driver.c" />
+    <ClCompile Include="hook.c" />
+    <ClCompile Include="memory.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="definitions.h" />
