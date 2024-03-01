@@ -21,9 +21,9 @@ BOOL CallKernelFunction(void* kernel_function_address)
 	// push   rbx                       [53]
 	// push   rsi                       [56]
 
-	// «а данными изминени€ми очень внимательно след€т все анти-читы (дл€ андетекта нужно мен€ть shell code)
-	BYTE shell_code[] = { 0x48, 0xB8 }; // mov ..
-	BYTE shell_code_end[] = { 0xFF, 0xE0 }; // jmp ..
+	// «а данными изминени€ми очень внимательно след€т все анти-читы (дл€ андетекта нужно мен€ть shellCode)
+	BYTE shell_code[] = { 0x48, 0xBA }; // mov .. 8bd8  { 0x8B, 0xD8 }
+	BYTE shell_code_end[] = { 0xFF, 0xE2 }; // jmp .. eb29 { 0xEB, 0x29 }
 
 	// ѕодготавливаем инструкции к написанию
 	RtlSecureZeroMemory(&orig, sizeof(orig));
