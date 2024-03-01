@@ -24,8 +24,25 @@
     </Inf>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="driver.cpp">
+    <ClCompile Include="driver.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="hook.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="memory.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="definitions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="memory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

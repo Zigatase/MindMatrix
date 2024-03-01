@@ -1,3 +1,6 @@
+#ifndef DEFENITIONS_H_
+#define DEFENITIONS_H_
+
 #include <ntdef.h>
 #include <ntifs.h>
 #include <ntddk.h>
@@ -47,7 +50,7 @@ typedef struct _RTL_PROCESS_MODULES
 	RTL_PROCESS_MODULE_INFORMATION Modules[1];
 } RTL_PROCESS_MODULE, * PRTL_PROCESS_MODULES;
 
-extern "C" _declspec(dllimport)
+
 NTSTATUS NTAPI ZwProtectVirtualMemory(
 	HANDLE ProcessHandle,
 	PVOID * BaseAddress,
@@ -56,20 +59,19 @@ NTSTATUS NTAPI ZwProtectVirtualMemory(
 	PULONG OldProtect
 );
 
-extern "C" NTKERNELAPI
-PVOID NTAPI RtlFindRxporedRoutineByName(
+
+NTKERNELAPI PVOID NTAPI RtlFindExportedRoutineByName(
 	_In_ PVOID ImageBase,
 	_In_ PCCH RoutineName
 );
 
-extern "C" NTSTATUS ZwQuerySystemInformation(ULONG InfoClass, PVOID Buffer, ULONG Length, PULONG ReturnLength);
+NTSTATUS ZwQuerySystemInformation(ULONG InfoClass, PVOID Buffer, ULONG Length, PULONG ReturnLength);
 
-extern "C" NTKERNELAPI
-PPEB PsGetProcessPeb(
+NTKERNELAPI PPEB PsGetProcessPeb(
 	IN PEPROCESS Process
 );
 
-extern "C" NTSTATUS NTAPI MmCopyVirtualMemory(
+NTSTATUS NTAPI MmCopyVirtualMemory(
 	PEPROCESS SourceProcess,
 	PVOID SourceAddress,
 	PEPROCESS TargetProcess,
@@ -78,3 +80,5 @@ extern "C" NTSTATUS NTAPI MmCopyVirtualMemory(
 	KPROCESSOR_MODE PreviousMode,
 	PSIZE_T ReturnSize
 );
+
+#endif // !DEFENITIONS_H_
