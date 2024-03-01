@@ -6,15 +6,16 @@ BOOL CallKernelFunction(void* kernel_function_address)
 	if (!kernel_function_address)
 		return FALSE;
 
+	// Пример хука https://github.com/23splat/NtOpenCompositionSurfaceSwapChainHandleInfo/blob/main/main.cpp
 	// Путь к драйверу который хотим хукнуть | название функции в драйвере
 	PVOID* function = (PVOID*)(GetSystemModuleExport("\\SystemRoot\\System32\\drivers\\dxgkrnl.sys",
-																	"NtSetCompositionSurfaceStatistics"));
+																	"NtOpenCompositionSurfaceSwapChainHandleInfo")); // NtQueryCompositionSurfaceStatistics
 
 	if (!function)
 		return FALSE;
 
 	// 12 byte для хука
-	BYTE orig[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+	BYTE orig[] = { 0x4C, 0x89, 0x44, 0x24, 0x18, 0x48, 0x89, 0xC2, 0x40, 0x08, 0x53, 0x56 };
 
 	// За данными изминениями очень внимательно следят все анти-читы (для андетекта нужно менять shell code)
 	BYTE shell_code[] = { 0x48, 0xB8 }; // mov rax, xxx
