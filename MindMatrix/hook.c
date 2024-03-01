@@ -16,10 +16,14 @@ BOOL CallKernelFunction(void* kernel_function_address)
 
 	// 12 byte для хука
 	BYTE orig[] = { 0x4C, 0x89, 0x44, 0x24, 0x18, 0x48, 0x89, 0xC2, 0x40, 0x08, 0x53, 0x56 };
+	// mov    QWORD PTR[rsp + 0x18], r8 [4c 89 44 24 18]
+	// mov    QWORD PTR[rsp + 0x8], rcx [48 89 4c 24 08]
+	// push   rbx                       [53]
+	// push   rsi                       [56]
 
 	// За данными изминениями очень внимательно следят все анти-читы (для андетекта нужно менять shell code)
-	BYTE shell_code[] = { 0x48, 0xB8 }; // mov rax, xxx
-	BYTE shell_code_end[] = { 0xFF, 0xE0 }; // jmp rax
+	BYTE shell_code[] = { 0x48, 0xB8 }; // mov ..
+	BYTE shell_code_end[] = { 0xFF, 0xE0 }; // jmp ..
 
 	// Подготавливаем инструкции к написанию
 	RtlSecureZeroMemory(&orig, sizeof(orig));
