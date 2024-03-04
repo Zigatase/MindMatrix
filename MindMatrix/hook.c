@@ -22,8 +22,8 @@ BOOL CallKernelFunction(void* kernel_function_address)
 	// push   rsi                       [56]
 
 	// За данными изминениями очень внимательно следят все анти-читы (для андетекта нужно менять shellCode)
-	BYTE shell_code[] = { 0x48, 0xBA }; // mov .. 8bd8  { 0x8B, 0xD8 }
-	BYTE shell_code_end[] = { 0xFF, 0xE2 }; // jmp .. eb29 { 0xEB, 0x29 }
+	BYTE shell_code[] = { 0x48, 0xBA }; // mov rdx
+	BYTE shell_code_end[] = { 0xFF, 0xE2 }; // jmp rdx
 
 	// Подготавливаем инструкции к написанию
 	RtlSecureZeroMemory(&orig, sizeof(orig));
